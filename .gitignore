@@ -1,0 +1,5 @@
+.idea
+logs/*.log
+service/logs/*.log
+service/config.cfg
+dist/

@@ -1,0 +1,380 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  background-color: #ffffff;
+  color: #3b3b3b;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
+  justify-content: center;
+  line-height: 20px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  transition: opacity 0.3s;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button,
+footer,
+input,
+textarea,
+.copyright,
+.button {
+  line-height: 125%;
+}
+
+h1 {
+  color: #3b3b3b;
+  font-size: 32px;
+  font-weight: bold;
+  margin: 0px;
+}
+
+h2 {
+  color: #3b3b3b;
+  font-size: 28px;
+  font-weight: bold;
+  margin: 16px 0 8px;
+}
+
+h3 {
+  color: #3b3b3b;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 8px 0 4px;
+}
+
+h4 {
+  color: #3b3b3b;
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 5px;
+  margin-bottom: 4px;
+}
+
+h5 {
+  color: #3b3b3b;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 5px;
+  margin-bottom: 4px;
+}
+
+h6 {
+  color: #3b3b3b;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 5px;
+  margin-bottom: 4px;
+}
+
+a {
+  color: #194b7d;
+  text-decoration: none;
+}
+
+.outlineButton,
+.button,
+button {
+  background-color: #194b7d;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px 16px;
+  white-space: nowrap;
+}
+
+footer {
+  color: #9c9c9c;
+  margin: 40px;
+  text-align: center;
+}
+
+footer a {
+  font-weight: bold;
+}
+
+.pageContainer {
+  background-color: #fff;
+  box-shadow: 0px 0px 2px 1px #dee2e6;
+  border-radius: 5px;
+  max-width: 850px;
+  margin: 2rem auto;
+}
+
+.headline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 5rem auto 0rem;
+}
+
+.headline span {
+  padding: 16px;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.headline img {
+  width: 50px;
+  height: auto;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.headline img:hover {
+  transform: scale(1.1);
+}
+
+.headline div {
+  font-size: 14px;
+  font-weight: 600;
+  color: #7C7C7C;
+}
+
+.reportContainer {
+  margin: 30px auto;
+  width: 100%;
+}
+
+.statusContainer {
+  border-radius: 5px;
+  text-align: left;
+  padding: 24px 24px 10px 24px;
+}
+
+.statusContainer+.statusContainer {
+  margin-top: 30px;
+}
+
+.statusStreamContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.statusSquare {
+  border-radius: 3px;
+  height: 30px;
+  min-width: 8px;
+  width: 100%;
+}
+
+.statusSquare:hover {
+  transform: scaleY(1.2);
+  overflow: hidden;
+}
+
+.statusSquare+.statusSquare {
+  margin-left: 3px;
+}
+
+.sectionUrl {
+  font-size: 14px;
+  margin-right: 20px;
+}
+
+.statusHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 2px;
+}
+
+.statusSubtitle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.statusHeadline {
+  color: #eee;
+  padding: 0px 8px;
+  border-radius: 15px;
+  font-size: 12px;
+  margin-left: 12px;
+  margin-top: 3px;
+}
+
+.statusUptime {
+  flex: 1;
+  text-align: right;
+  color: #7c7c7c;
+  font-size: 12px;
+}
+
+.tooltipContent {
+  color: #7c7c7c;
+  font-size: 13px;
+}
+
+.uptimeContainer {
+  color: #999;
+  display: flex;
+  margin-top: 8px;
+  font-size: 12px;
+}
+
+.uptimeContainer hr {
+  border: none;
+  border-top: 1px dashed #eee;
+  width: 100%;
+  margin: 10px;
+}
+
+.success {
+  background-color: #00dfa2;
+  color: #fff;
+}
+
+.failure {
+  background-color: #ff0060;
+  color: #fff;
+}
+
+.nodata {
+  background-color: #dddddd;
+  color: #ccc;
+}
+
+.partial {
+  background-color: #ffb84c;
+  color: #fff;
+}
+
+canvas {
+  max-height: 128px;
+  min-width: 100px;
+  max-width: 100%;
+  padding: 0rem 1rem 0rem 1.2rem;
+}
+
+.span-wrapper {
+  display: flex; 
+  justify-content: space-between; /* 分别将span推到左右两边 */
+  padding: 0px 24px 0px 24px;
+}
+
+.align-left {
+  text-align: left;
+  color: #7c7c7c;
+  font-size: 12px;
+}
+
+.align-right {
+  text-align: right;
+  color: #7c7c7c;
+  font-size: 12px;
+}
+
+.clientInfo{
+  box-shadow: 0px 0px 2px 1px #dee2e6;
+  padding: 10px;
+  background-color: #fff;
+  max-width: 850px;
+  margin: 2rem auto;
+}
+.clientInfo span{
+  white-space: pre-wrap;
+  font-size: 13px;
+  color: #555555;
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 800px) {
+  .pageContainer {
+    margin: 20px 20px 20px;
+    box-shadow: 0px 0px 2px 1px #dee2e6;
+  }
+
+  .statusHeader {
+    display: flex;
+  }
+
+  .statusSubtitle {
+    align-items: baseline;
+  }
+
+  .sectionUrl {
+    margin-left: 0;
+    margin-top: 8px;
+    text-align: left;
+  }
+
+  .statusHeadline {
+    margin-left: 12px;
+    margin-top: 0px;
+  }
+
+  .statusUptime {
+    margin-left: 0;
+    margin-top: 8px;
+    text-align: right;
+  }
+
+  .statusTitle,
+  .statusHeadline {
+    display: inline-block;
+  }
+
+  .statusSquare+.statusSquare {
+    margin-left: 1px;
+  }
+
+  .statusStreamContainer {
+    display: flex;
+    align-items: center;
+    overflow-x: scroll;
+    height: 37px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .statusStreamContainer::-webkit-scrollbar {
+    display: none;
+  }
+
+  .statusSquare {
+    border-radius: 3px;
+    min-width: 5px;
+    height: 30px;
+    width: 100%;
+  }
+
+  .statusSquare:hover {
+    transform: scaleY(1.2);
+    overflow: hidden;
+  }
+
+  .statusContainer {
+    padding: 10px;
+  }
+
+  .statusContainer+.statusContainer {
+    margin-top: 15px;
+  }
+
+  canvas {
+    max-height: 128px;
+    min-width: 100px;
+    max-width: 100%;
+    padding: 0rem 0.2rem 0rem 0.5rem;
+  }
+}

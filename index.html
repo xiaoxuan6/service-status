@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>service status</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="keywords" content="Service Status 服务状态监测页面"/>
+    <meta name="description" content="每10分钟记录一次服务状态日志，并使用页面展示。"/>
+    <link rel="icon" href="./favicon.ico"/>
+    <link rel="stylesheet" href="./src/index.css"/>
+</head>
+
+<body>
+<div id="SiteInfo" class="headline">
+    <a href="/">
+        <img src="./src/logo.svg" alt="Logo"/>
+    </a>
+    <span> service status </span>
+    <div id="updateTime">Last updated on: Loading...</div>
+</div>
+
+<div class="pageContainer">
+    <div id="reports" class="reportContainer"></div>
+    <div id="templates" style="display: none">
+        <div id="statusSquareTemplate" class="statusSquare $color" data-status="$color"></div>
+        <div id="statusLineTemplate" class="statusLine"></div>
+
+        <div id="statusStreamContainerTemplate" class="statusStreamContainer"></div>
+
+        <div id="statusContainerTemplate" class="statusContainer">
+            <div class="statusHeader">
+                <h6 class="statusTitle">$title</h6>
+                <div class="$color statusHeadline">$status</div>
+            </div>
+            <div class="statusSubtitle">
+                <div class="sectionUrl">
+                    <a href="$url" target="_blank">$domainname</a>
+                </div>
+
+                <div id="tooltip" class="tooltipContent">
+                    <span class="tooltipStatus"></span>
+                </div>
+
+                <div class="statusUptime">$upTime Uptime 在60天内</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="clientInfo" class="clientInfo">
+    <p>
+        <span data-trace-placeholder="ip">IP : $ip  |  </span>
+        <span data-trace-placeholder="loc">Loc : $loc  |  </span>
+        <span data-trace-placeholder="ts">TS : $ts</span>
+    </p>
+    <p><span data-trace-placeholder="uag">UA : $uag</span></p>
+</div>
+
+<footer>开源于GitHub <a target="_blank" href="https://github.com/xiaoxua6/service-status">xiaoxua6/service-status</a>
+</footer>
+</body>
+
+<script src="./src/chart.js"></script>
+<script src="./src/timelapsechart.js"></script>
+<script src="./src/lastupdated.js"></script>
+<script src="./src/getclieninfo.js"></script>
+<script src="./src/scrollbar.js"></script>
+<script src="./src/index.js"></script>
+
+</html>
