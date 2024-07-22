@@ -27,6 +27,7 @@ RUN apk update && \
     chmod +x /etc/caddy/status && \
     chmod +x ./entrypoint.sh
 
+ENV VERBOSE=false
 ENV TZ=Asia/Shanghai
 
 ENTRYPOINT ["./entrypoint.sh"]
