@@ -124,10 +124,16 @@ func run() {
 				result, durationMs = "failed", 0
 			}
 
+			file, err := os.OpenFile(fmt.Sprintf("%s/%s_report.log", dir, name), os.O_RDWR|os.O_CREATE|os.O_APPEND, 0644)
+			if err != nil {
+				fmt.Printf("Failed to open file: %v\n", err)
+				return
+			}
+			defer file.Close()
+
 			body := fmt.Sprintf("%s, %s, %s\n", time.Now().Format("2006-01-02 15:04"), result, strconv.Itoa(int(durationMs)))
-			file, _ := os.OpenFile(fmt.Sprintf("%s/%s_report.log", dir, name), os.O_CREATE|os.O_APPEND, os.ModePerm)
-			_, errs := file.WriteString(body)
-			if errs != nil {
+			_, err = file.WriteString(body)
+			if err != nil {
 				fmt.Printf("文件 [%s_report.log] 写入失败: %v\n", name, err)
 			}
 
