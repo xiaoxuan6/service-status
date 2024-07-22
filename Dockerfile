@@ -24,6 +24,7 @@ COPY --from=build-dev /go/src/app/status ./status
 
 RUN apk update && \
     apk add --no-cache bash curl && \
-    chmod +x ./status
+    chmod +x /etc/caddy/status && \
+    chmod +x ./entrypoint.sh
 
 ENTRYPOINT ["./entrypoint.sh"]

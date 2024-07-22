@@ -30,5 +30,5 @@ bai du=https://www.baidu.com
 `config.cfg` 修改为自己的网站
 
 ```docker
-docker run --name service-status -v $(pwd)/config.cfg:/etc/caddy/config.cfg -p 80:80 -d ghcr.io/xiaoxuan6/service-status:latest
+docker run --name service-status -v $(pwd)/config.cfg:/etc/caddy/config.cfg -p 8080:8080 -d ghcr.io/xiaoxuan6/service-status:latest
 ```
