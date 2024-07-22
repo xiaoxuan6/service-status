@@ -27,4 +27,6 @@ RUN apk update && \
     chmod +x /etc/caddy/status && \
     chmod +x ./entrypoint.sh
 
+ENV VERBOSE false
+
 ENTRYPOINT ["./entrypoint.sh"]
