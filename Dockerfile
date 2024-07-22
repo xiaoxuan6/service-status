@@ -23,10 +23,10 @@ COPY --link Caddyfile config.cfg favicon.ico index.html entrypoint.sh ./
 COPY --from=build-dev /go/src/app/status ./status
 
 RUN apk update && \
-    apk add --no-cache bash curl && \
+    apk add --no-cache bash curl tzdata && \
     chmod +x /etc/caddy/status && \
     chmod +x ./entrypoint.sh
 
-ENV VERBOSE false
+ENV TZ=Asia/Shanghai
 
 ENTRYPOINT ["./entrypoint.sh"]
