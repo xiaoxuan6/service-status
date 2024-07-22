@@ -143,7 +143,7 @@ func resetFileContent(filename string) {
 	var (
 		lock        sync.Mutex
 		fileContent = make([]string, 0)
-		count       = 500
+		count       = 5000
 	)
 
 	body, _ := os.ReadFile(filename)

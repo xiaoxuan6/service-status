@@ -5,4 +5,5 @@ service/config.cfg
 .gitignore
 .goreleaser.yaml
 Dockerfile
+LICENSE
 README.md
