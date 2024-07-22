@@ -76,14 +76,6 @@ func run() {
 		os.Exit(1)
 	}
 
-	if _, err := os.Stat(dir); os.IsNotExist(err) {
-		err := os.Mkdir(dir, os.ModePerm)
-		if err != nil {
-			fmt.Printf("创建文件夹失败: %v\n", err)
-			os.Exit(1)
-		}
-	}
-
 	content, _ := os.ReadFile(configFile)
 	f := bufio.NewReader(strings.NewReader(string(content)))
 	for {

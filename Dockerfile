@@ -19,13 +19,15 @@ FROM caddy:2.4.5-alpine
 WORKDIR /etc/caddy
 
 COPY --link src ./src
+COPY --link logs ./logs
 COPY --link Caddyfile config.cfg favicon.ico index.html entrypoint.sh ./
 COPY --from=build-dev /go/src/app/status ./status
 
 RUN apk update && \
     apk add --no-cache bash curl tzdata && \
     chmod +x /etc/caddy/status && \
-    chmod +x ./entrypoint.sh
+    chmod +x ./entrypoint.sh && \
+    chmod 777 /etc/caddy/logs
 
 ENV VERBOSE=false
 ENV TZ=Asia/Shanghai

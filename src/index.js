@@ -251,8 +251,10 @@ function splitRowsByDate(rows) {
     }
 
     let result = 0;
-    if (resultStr.trim() == "success") {
-      result = 1;
+    if (resultStr !== undefined && resultStr !== null) {
+        if (resultStr.trim() == "success") {
+            result = 1;
+        }
     }
     sum += result;
     count++;

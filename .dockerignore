@@ -1,5 +1,4 @@
 .github/
-logs/*.log
 service/logs/*.log
 service/config.cfg
 .gitignore
