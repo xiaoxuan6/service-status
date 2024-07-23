@@ -2,10 +2,6 @@
 
 服务状态展示
 
-## 👀 查看效果
-
-在线演示 :
-
 ## ⚙️ 配置说明
 
 ### 2. 按照下面格式修改 `config.cfg` 文件中的内容。
@@ -30,5 +26,5 @@ bai du=https://www.baidu.com
 `config.cfg` 修改为自己的网站
 
 ```docker
-docker run --name service-status -v $(pwd)/config.cfg:/etc/caddy/config.cfg -p 8080:8080 -d ghcr.io/xiaoxuan6/service-status:latest
+docker run --name service-status -v $(pwd)/config.cfg:/etc/caddy/config.cfg -p 8080:8080 -d ghcr.io/xiaoxuan6/service-status/service-status:latest
 ```
