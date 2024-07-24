@@ -1,27 +1,27 @@
 package notify
 
 type Env struct {
-	Channel  string `json:"channel"`
+	Channel  string `yaml:"channel"`
 	Dingding struct {
-		Token  string `json:"token"`
-		Secret string `json:"secret"`
-	} `json:"dingding"`
+		Token  string `yaml:"token"`
+		Secret string `yaml:"secret"`
+	} `yaml:"dingding"`
 	Email struct {
-		SenderAddress   string `json:"sender_address"`
-		SmtpHostAddress string `json:"smtp_host_address"`
-	} `json:"email"`
+		SenderAddress   string `yaml:"sender_address"`
+		SmtpHostAddress string `yaml:"smtp_host_address"`
+	} `yaml:"email"`
 	Lark struct {
-		WebhookUrl string `json:"webhook_url"`
-	} `json:"lark"`
+		WebhookUrl string `yaml:"webhook_url"`
+	} `yaml:"lark"`
 	Telegram struct {
-		Token   string  `json:"token"`
-		ChatIds []int64 `json:"chat_ids"`
-	} `json:"telegram"`
+		Token   string  `yaml:"token"`
+		ChatIds []int64 `yaml:"chat_ids"`
+	} `yaml:"telegram"`
 	Wechat struct {
-		AppId          string `json:"app_id"`
-		AppSecret      string `json:"app_secret"`
-		Token          string `json:"token"`
-		EncodingAesKey string `json:"encoding_aes_key"`
-		UserIds        []string `json:"user_ids"`
-	} `json:"wechat"`
+		AppId          string `yaml:"app_id"`
+		AppSecret      string `yaml:"app_secret"`
+		Token          string `yaml:"token"`
+		EncodingAesKey string `yaml:"encoding_aes_key"`
+		UserIds        []string `yaml:"user_ids"`
+	} `yaml:"wechat"`
 }

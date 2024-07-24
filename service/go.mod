@@ -3,9 +3,11 @@ module service-status
 go 1.22.5
 
 require (
+	github.com/fsnotify/fsnotify v1.7.0
 	github.com/nikoksr/notify v1.0.0
 	github.com/robfig/cron/v3 v3.0.0
 	github.com/silenceper/wechat/v2 v2.1.6
+	gopkg.in/yaml.v2 v2.4.0
 )
 
 require (
