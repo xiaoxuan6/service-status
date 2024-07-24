@@ -2,11 +2,13 @@ package main
 
 import (
 	"bufio"
+	"encoding/json"
 	"fmt"
 	"github.com/robfig/cron/v3"
 	"io"
 	"net/http"
 	"os"
+	"service-status/notify"
 	"slices"
 	"strconv"
 	"strings"
@@ -50,11 +52,16 @@ func cronStar() {
 	c.Start()
 }
 
+var env *notify.Env
+
 func main() {
 
 	if _, err := os.Stat(dir); os.IsExist(err) {
 		_ = os.RemoveAll(dir)
 	}
+
+	f, _ := os.Open("env.yaml")
+	_ = json.NewDecoder(f).Decode(&env)
 
 	run()
 	cronStar()
@@ -95,12 +102,14 @@ func run() {
 		go func() {
 			defer wg.Done()
 
+			var errors error
 			start := time.Now()
 			client := &http.Client{
 				Timeout: 10 * time.Second,
 			}
 			response, e := client.Get(url)
 			if e != nil {
+				errors = e
 				return
 			}
 			defer response.Body.Close()
@@ -129,6 +138,10 @@ func run() {
 				fmt.Printf("文件 [%s_report.log] 写入失败: %v\n", name, err)
 			}
 
+			if result == "failed" {
+				n := notify.NewNotify(env)
+				n.Send("service status down", fmt.Sprintf("url [%s] fetch fail: %s", url, errors.Error()))
+			}
 			return
 		}()
 	}

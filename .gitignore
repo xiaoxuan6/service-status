@@ -2,4 +2,5 @@
 logs/*.log
 service/logs/*.log
 service/config.cfg
+service/env.yaml
 dist/

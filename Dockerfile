@@ -10,6 +10,7 @@ RUN apk add --no-cache upx || \
     go mod tidy
 
 COPY --link service/main.go service/go.mod service/go.sum ./
+COPY --link service/notify ./notify
 
 RUN go build -o status . && \
     [ -e /usr/bin/upx ] && upx status || echo
@@ -20,7 +21,7 @@ WORKDIR /etc/caddy
 
 COPY --link src ./src
 COPY --link logs ./logs
-COPY --link Caddyfile config.cfg favicon.ico index.html entrypoint.sh ./
+COPY --link Caddyfile config.cfg favicon.ico index.html entrypoint.sh env.yaml ./
 COPY --from=build-dev /go/src/app/status ./status
 
 RUN apk update && \
