@@ -19,8 +19,9 @@ FROM caddy:2.4.5-alpine
 
 WORKDIR /etc/caddy
 
-COPY --link src ./src
 COPY --link logs ./logs
+COPY --link public ./public
+COPY --link src ./src
 COPY --link Caddyfile config.cfg favicon.ico index.html entrypoint.sh env.yaml ./
 COPY --from=build-dev /go/src/app/status ./status
 
