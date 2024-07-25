@@ -1,11 +1,56 @@
-* {
-  box-sizing: border-box;
-}
-
 html {
   height: 100%;
   display: flex;
   flex-direction: column;
+}
+
+header {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background-color: #fff;
+  height: 4rem;
+  border-bottom: 1px solid #dee2e6;
+  transition: transform 0.2s ease; 
+  transform: translateY(0); 
+}
+
+header.hidden {
+  transform: translateY(-4rem); 
+}
+
+.headerinner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 65rem;
+  width: 55rem;
+  padding: 0 1rem 0 1rem;
+}
+
+.headerleft {
+  display: flex;
+  align-items: center;
+}
+
+.headerinner img {
+  width: 2rem;
+  height: auto;
+  margin-right: 1rem;
+}
+
+.headerinner a {
+  display: flex;
+  align-items: flex-end;
+  color: #000000;
+  font-size: 20px;
 }
 
 body {
@@ -16,12 +61,14 @@ body {
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
   justify-content: center;
   line-height: 20px;
+  min-width: 400px;
   margin: 0;
   padding: 0;
   text-align: center;
   transition: opacity 0.3s;
 }
 
+/* 文本样式 */
 h1,
 h2,
 h3,
@@ -37,29 +84,33 @@ textarea,
   line-height: 125%;
 }
 
-h1 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: #3b3b3b;
-  font-size: 32px;
   font-weight: bold;
+}
+
+h1 {
+  font-size: 32px;
   margin: 0px;
 }
 
 h2 {
-  color: #3b3b3b;
   font-size: 28px;
-  font-weight: bold;
   margin: 16px 0 8px;
 }
 
 h3 {
-  color: #3b3b3b;
   font-size: 24px;
   font-weight: 700;
   margin: 8px 0 4px;
 }
 
 h4 {
-  color: #3b3b3b;
   font-size: 18px;
   font-weight: 600;
   margin-top: 5px;
@@ -67,26 +118,23 @@ h4 {
 }
 
 h5 {
-  color: #3b3b3b;
   font-size: 16px;
-  font-weight: bold;
   margin-top: 5px;
   margin-bottom: 4px;
 }
 
 h6 {
-  color: #3b3b3b;
   font-size: 16px;
-  font-weight: bold;
   margin-top: 5px;
   margin-bottom: 4px;
 }
 
 a {
-  color: #194b7d;
+  color: #005CC5;
   text-decoration: none;
 }
 
+/* 按钮样式 */
 .outlineButton,
 .button,
 button {
@@ -107,10 +155,6 @@ footer {
   text-align: center;
 }
 
-footer a {
-  font-weight: bold;
-}
-
 .pageContainer {
   background-color: #fff;
   box-shadow: 0px 0px 2px 1px #dee2e6;
@@ -124,7 +168,7 @@ footer a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 5rem auto 0rem;
+  margin: 6rem auto 0rem;
 }
 
 .headline span {
@@ -159,31 +203,28 @@ footer a {
   border-radius: 5px;
   text-align: left;
   padding: 24px 24px 10px 24px;
-}
-
-.statusContainer+.statusContainer {
   margin-top: 30px;
 }
 
 .statusStreamContainer {
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  width: auto;
+  max-width: 850px;
 }
 
 .statusSquare {
   border-radius: 3px;
   height: 30px;
-  min-width: 8px;
-  width: 100%;
+  width: 10px;
+  min-width: 5px;
+  margin-right: 3px;
 }
 
 .statusSquare:hover {
   transform: scaleY(1.2);
   overflow: hidden;
-}
-
-.statusSquare+.statusSquare {
-  margin-left: 3px;
 }
 
 .sectionUrl {
@@ -200,7 +241,7 @@ footer a {
 
 .statusSubtitle {
   display: flex;
-  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 12px;
 }
@@ -215,7 +256,6 @@ footer a {
 }
 
 .statusUptime {
-  flex: 1;
   text-align: right;
   color: #7c7c7c;
   font-size: 12px;
@@ -263,13 +303,13 @@ footer a {
 canvas {
   max-height: 128px;
   min-width: 100px;
-  max-width: 100%;
-  padding: 0rem 1rem 0rem 1.2rem;
+  max-width: 850px;
+  padding: 0rem 1rem 0rem 1.4rem;
 }
 
 .span-wrapper {
-  display: flex; 
-  justify-content: space-between; /* 分别将span推到左右两边 */
+  display: flex;
+  justify-content: space-between;
   padding: 0px 24px 0px 24px;
 }
 
@@ -285,23 +325,26 @@ canvas {
   font-size: 12px;
 }
 
-.clientInfo{
-  box-shadow: 0px 0px 2px 1px #dee2e6;
-  padding: 10px;
+.clientInfo {
+  box-sizing: border-box;
   background-color: #fff;
+  box-shadow: 0px 0px 2px 1px #dee2e6;
+  border-radius: 5px;
+  padding: 10px;
   max-width: 850px;
   margin: 2rem auto;
 }
-.clientInfo span{
+
+.clientInfo span {
   white-space: pre-wrap;
   font-size: 13px;
   color: #555555;
 }
 
 /* 响应式设计 */
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 576px) {
   .pageContainer {
-    margin: 20px 20px 20px;
+    margin: 2rem 1rem;
     box-shadow: 0px 0px 2px 1px #dee2e6;
   }
 
@@ -335,8 +378,83 @@ canvas {
     display: inline-block;
   }
 
-  .statusSquare+.statusSquare {
-    margin-left: 1px;
+  .statusStreamContainer {
+    display: flex;
+    align-items: center;
+    overflow-x: scroll;
+    height: 37px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .statusStreamContainer::-webkit-scrollbar {
+    display: none;
+  }
+
+  .statusSquare {
+    border-radius: 3px;
+    min-width: 7px;
+    height: 30px;
+    width: 100%;
+    margin-right: 1px;
+  }
+
+  .statusSquare:hover {
+    transform: scaleY(1.2);
+    overflow: hidden;
+  }
+
+  .statusContainer {
+    padding: 10px;
+    margin-top: 15px;
+  }
+
+  canvas {
+    max-height: 128px;
+    min-width: 100px;
+    max-width: 850px;
+    padding: 0rem 0.2rem 0rem 0.5rem;
+  }
+
+  .clientInfo {
+    margin: 2rem 1rem;
+  }
+}
+
+@media screen and (min-width: 578px) and (max-width: 768px) {
+  .pageContainer {
+    margin: 2rem 1rem;
+    box-shadow: 0px 0px 2px 1px #dee2e6;
+  }
+
+  .statusHeader {
+    display: flex;
+  }
+
+  .statusSubtitle {
+    align-items: baseline;
+  }
+
+  .sectionUrl {
+    margin-left: 0;
+    margin-top: 8px;
+    text-align: left;
+  }
+
+  .statusHeadline {
+    margin-left: 12px;
+    margin-top: 0px;
+  }
+
+  .statusUptime {
+    margin-left: 0;
+    margin-top: 8px;
+    text-align: right;
+  }
+
+  .statusTitle,
+  .statusHeadline {
+    display: inline-block;
   }
 
   .statusStreamContainer {
@@ -347,15 +465,17 @@ canvas {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
   .statusStreamContainer::-webkit-scrollbar {
     display: none;
   }
 
   .statusSquare {
     border-radius: 3px;
-    min-width: 5px;
+    min-width: 7px;
     height: 30px;
     width: 100%;
+    margin-right: 1px;
   }
 
   .statusSquare:hover {
@@ -365,16 +485,96 @@ canvas {
 
   .statusContainer {
     padding: 10px;
-  }
-
-  .statusContainer+.statusContainer {
     margin-top: 15px;
   }
 
   canvas {
     max-height: 128px;
     min-width: 100px;
-    max-width: 100%;
+    max-width: 850px;
     padding: 0rem 0.2rem 0rem 0.5rem;
+  }
+
+  .clientInfo {
+    margin: 2rem 1rem;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 992px) {
+  .pageContainer {
+    margin: 2rem auto;
+    box-shadow: 0px 0px 2px 1px #dee2e6;
+  }
+
+  .statusHeader {
+    display: flex;
+  }
+
+  .statusSubtitle {
+    align-items: baseline;
+  }
+
+  .sectionUrl {
+    margin-left: 0;
+    margin-top: 8px;
+    text-align: left;
+  }
+
+  .statusHeadline {
+    margin-left: 12px;
+    margin-top: 0px;
+  }
+
+  .statusUptime {
+    margin-left: 0;
+    margin-top: 3px;
+    text-align: right;
+  }
+
+  .statusTitle,
+  .statusHeadline {
+    display: inline-block;
+  }
+
+  .statusStreamContainer {
+    display: flex;
+    align-items: center;
+    overflow-x: scroll;
+    height: 37px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .statusStreamContainer::-webkit-scrollbar {
+    display: none;
+  }
+
+  .statusSquare {
+    border-radius: 3px;
+    min-width: 7px;
+    height: 30px;
+    width: 100%;
+    margin-right: 2px;
+  }
+
+  .statusSquare:hover {
+    transform: scaleY(1.2);
+    overflow: hidden;
+  }
+
+  .statusContainer {
+    padding: 24px 24px 10px 24px;
+    margin-top: 15px;
+  }
+
+  canvas {
+    max-height: 128px;
+    min-width: 100px;
+    max-width: 850px;
+    padding: 0rem 0.2rem 0rem 0.5rem;
+  }
+
+  .clientInfo {
+    margin: 2rem auto;
   }
 }
