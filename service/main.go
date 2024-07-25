@@ -2,7 +2,6 @@ package main
 
 import (
 	"bufio"
-	"encoding/json"
 	"fmt"
 	"github.com/fsnotify/fsnotify"
 	"github.com/robfig/cron/v3"
@@ -10,6 +9,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"path/filepath"
 	"service-status/notify"
 	"slices"
 	"strconv"
@@ -19,10 +19,13 @@ import (
 )
 
 var (
-	dir         = "logs"
-	configFile  = "config.cfg"
-	statusCodes = []int{200, 201, 202, 301, 302, 307}
+	dir          = "logs"
+	configFile   = "config.cfg"
+	statusCodes  = []int{200, 201, 202, 301, 302, 307}
+	eventTimes   = make(map[string]time.Time)
+	debounceTime = 3 * time.Second // 时间间隔，可以根据需要调整
 
+	mu  sync.Mutex
 	env *notify.Env
 	wg  sync.WaitGroup
 )
@@ -33,14 +36,25 @@ func main() {
 		_ = os.RemoveAll(dir)
 	}
 
-	f, _ := os.Open("env.yaml")
-	_ = yaml.NewDecoder(f).Decode(&env)
-
+	loadEnv()
 	run()
 	cronStar()
 	watcherNotify()
 
 	select {}
+}
+
+func loadEnv() {
+	b, err := os.ReadFile("env.yaml")
+	if err != nil {
+		fmt.Printf("Failed to read env.yaml: %v\n", err)
+		return
+	}
+
+	err = yaml.Unmarshal(b, &env)
+	if err != nil {
+		fmt.Printf("Failed to decode env.yaml: %v\n", err)
+	}
 }
 
 func run() {
@@ -62,10 +76,10 @@ func run() {
 		}
 
 		sep := strings.Split(string(b), "=")
-		name, url := sep[0], sep[1]
+		name, url := sep[0], strings.TrimSpace(sep[1])
 
 		wg.Add(1)
-		go func() {
+		go func(name, url string) {
 			defer wg.Done()
 
 			start := time.Now()
@@ -108,7 +122,7 @@ func run() {
 				n.Send("service status down", fmt.Sprintf("url [%s] fetch fail status code: %s", url, strconv.Itoa(response.StatusCode)))
 			}
 			return
-		}()
+		}(name, url)
 	}
 
 	wg.Wait()
@@ -210,12 +224,22 @@ func watcherNotify() {
 
 				const eventModify = fsnotify.Write | fsnotify.Create
 				if (event.Op & eventModify) != 0 {
-					switch event.Name {
-					case "config.cfg":
-						run()
-					case "env.yaml":
-						file, _ := os.Open("env.yaml")
-						_ = json.NewDecoder(file).Decode(&env)
+					mu.Lock()
+					lastEventTime, exists := eventTimes[event.Name]
+					currentTime := time.Now()
+					if !exists || currentTime.Sub(lastEventTime) > debounceTime {
+						eventTimes[event.Name] = currentTime
+						mu.Unlock()
+						switch filepath.Base(event.Name) {
+						case "config.cfg":
+							run()
+						case "env.yaml":
+							time.Sleep(500 * time.Millisecond)
+							loadEnv()
+							fmt.Println("file [env.yaml] modified and reloaded.")
+						}
+					} else {
+						mu.Unlock()
 					}
 				}
 			}

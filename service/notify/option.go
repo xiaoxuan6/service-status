@@ -18,10 +18,10 @@ type Env struct {
 		ChatIds []int64 `yaml:"chat_ids"`
 	} `yaml:"telegram"`
 	Wechat struct {
-		AppId          string `yaml:"app_id"`
-		AppSecret      string `yaml:"app_secret"`
-		Token          string `yaml:"token"`
-		EncodingAesKey string `yaml:"encoding_aes_key"`
+		AppId          string   `yaml:"app_id"`
+		AppSecret      string   `yaml:"app_secret"`
+		Token          string   `yaml:"token"`
+		EncodingAesKey string   `yaml:"encoding_aes_key"`
 		UserIds        []string `yaml:"user_ids"`
 	} `yaml:"wechat"`
 }
