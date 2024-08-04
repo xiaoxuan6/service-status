@@ -134,7 +134,7 @@ func cronStar() {
 	c.AddFunc("0 */10 * * * *", func() {
 		run()
 	})
-	c.AddFunc("0 0 24 * * * *", func() {
+	c.AddFunc("0 0 23 * * *", func() {
 		if _, err := os.Stat(configFile); err != nil {
 			fmt.Println("file [config.cfg] not exists!")
 			return
