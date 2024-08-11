@@ -37,3 +37,15 @@ docker run --name service-status \
     -p 8080:8080 \
     -d ghcr.io/xiaoxuan6/service-status/service-status:latest
 ```
+
+允许设置密码
+
+```docker
+docker run --name service-status \
+    -v $(pwd)/config.cfg:/etc/caddy/config.cfg \
+    -v $(pwd)/env.yaml:/etc/caddy/env.yaml \
+    -e USERNAME=root \
+    -e PASSWORD=123 \
+    -p 8080:8080 \
+    -d ghcr.io/xiaoxuan6/service-status/service-status:latest
+```

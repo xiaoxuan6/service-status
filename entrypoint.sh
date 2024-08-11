@@ -9,4 +9,12 @@ else
   nohup /etc/caddy/status > /dev/null 2>&1 &
 fi
 
-caddy file-server --root /etc/caddy --listen :8080
+if [[ -n "$USERNAME" && -n "$PASSWORD" ]]; then
+  NEW_PASSWORD=$(caddy hash-password -p "$PASSWORD")
+  export USERNAME=$USERNAME
+  export PASSWORD=$NEW_PASSWORD
+
+  caddy run --config=/etc/caddy/password.Caddyfile
+else
+  caddy run --config=/etc/caddy/Caddyfile
+fi

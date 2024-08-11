@@ -22,11 +22,11 @@ WORKDIR /etc/caddy
 COPY --link logs ./logs
 COPY --link public ./public
 COPY --link src ./src
-COPY --link Caddyfile config.cfg favicon.ico index.html entrypoint.sh env.yaml ./
+COPY --link Caddyfile config.cfg favicon.ico index.html entrypoint.sh env.yaml password.Caddyfile ./
 COPY --from=build-dev /go/src/app/status ./status
 
 RUN apk update && \
-    apk add --no-cache bash curl tzdata && \
+    apk add --no-cache tzdata build-base && \
     chmod +x /etc/caddy/status && \
     chmod +x ./entrypoint.sh && \
     chmod 777 /etc/caddy/logs
