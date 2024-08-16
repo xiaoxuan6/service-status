@@ -1,4 +1,26 @@
 :8080 {
 	root * ./
 	file_server
+
+	@blockedPaths {
+		path /service/*
+	}
+	@blockedFiles {
+		path /Caddyfile
+		path /entrypoint.sh
+		path /env.yaml
+		path /password.Caddyfile
+	}
+	respond @blockedPaths 403
+	respond @blockedFiles 403
+
+	@static {
+	    file
+	    path *.svg *.ico *.css *.js
+	}
+
+	header @static {
+        Cache-Control "public, max-age=2592000" # 缓存一个月
+        defer
+	}
 }
